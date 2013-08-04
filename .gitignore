@@ -1,0 +1,10 @@
+# build
+target/
+
+# Eclipse
+.classpath
+.project
+
+# Sublime Text 2
+*.sublime-project
+*.sublime-workspace
