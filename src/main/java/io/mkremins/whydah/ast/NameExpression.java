@@ -2,17 +2,17 @@ package io.mkremins.whydah.ast;
 
 import io.mkremins.whydah.interpreter.Scope;
 
-import java.util.Arrays;
+import java.util.List;
 
 public final class NameExpression implements Expression {
 
 	private final String left;
 	private final NameExpression right;
 
-	public NameExpression(final String... names) {
-		left = names[0];
-		right = names.length == 1 ? null : new NameExpression(
-				Arrays.copyOfRange(names, 1, names.length));
+	public NameExpression(final List<String> names) {
+		left = names.get(0);
+		right = names.size() == 1 ?
+				null : new NameExpression(names.subList(1, names.size()));
 	}
 
 	@Override
