@@ -4,9 +4,9 @@ import io.mkremins.whydah.interpreter.Scope;
 
 import java.util.List;
 
-public final class RecordExpression extends Scope implements Expression {
+public final class RecordExpr extends Scope implements Expr {
 
-	public RecordExpression(final Scope parent, final List<Expression> vars) {
+	public RecordExpr(final Scope parent, final List<Expr> vars) {
 		super(parent);
 		for (int i = 0; i < vars.size(); i++) {
 			set(String.valueOf(i), vars.get(i));
@@ -19,7 +19,7 @@ public final class RecordExpression extends Scope implements Expression {
 	}
 
 	@Override
-	public Expression evaluateWithin(final Scope scope) {
+	public Expr evaluateWithin(final Scope scope) {
 		return this;
 	}
 

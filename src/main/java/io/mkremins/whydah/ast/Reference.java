@@ -2,7 +2,7 @@ package io.mkremins.whydah.ast;
 
 import io.mkremins.whydah.interpreter.Scope;
 
-public final class Reference implements Expression {
+public final class Reference implements Expr {
 
 	private final Scope scope;
 	private final String name;
@@ -12,11 +12,11 @@ public final class Reference implements Expression {
 		this.name = name;
 	}
 
-	public Expression get() {
+	public Expr get() {
 		return scope.get(name);
 	}
 
-	public void set(final Expression value) {
+	public void set(final Expr value) {
 		scope.set(name, value);
 	}
 
@@ -26,7 +26,7 @@ public final class Reference implements Expression {
 	}
 
 	@Override
-	public Expression evaluateWithin(final Scope scope) {
+	public Expr evaluateWithin(final Scope scope) {
 		return get();
 	}
 

@@ -4,15 +4,15 @@ import io.mkremins.whydah.interpreter.Scope;
 
 import java.util.List;
 
-public final class NameExpression implements Expression {
+public final class NameExpr implements Expr {
 
 	private final String left;
-	private final NameExpression right;
+	private final NameExpr right;
 
-	public NameExpression(final List<String> names) {
+	public NameExpr(final List<String> names) {
 		left = names.get(0);
 		right = names.size() == 1 ?
-				null : new NameExpression(names.subList(1, names.size()));
+				null : new NameExpr(names.subList(1, names.size()));
 	}
 
 	@Override
@@ -34,16 +34,16 @@ public final class NameExpression implements Expression {
 		if (right == null) {
 			return starting;
 		}
-		final Expression leftValue = starting.get(left);
-		if (leftValue instanceof RecordExpression) {
-			return right.resolveScope((RecordExpression) leftValue);
+		final Expr leftValue = starting.get(left);
+		if (leftValue instanceof RecordExpr) {
+			return right.resolveScope((RecordExpr) leftValue);
 		} else {
 			return null; // TODO throw exception instead of returning null
 		}
 	}
 
 	private String resolveBaseName() {
-		NameExpression child = right;
+		NameExpr child = right;
 		while (child.right != null) {
 			child = child.right;
 		}

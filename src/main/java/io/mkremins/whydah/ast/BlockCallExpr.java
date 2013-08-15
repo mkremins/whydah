@@ -4,13 +4,13 @@ import io.mkremins.whydah.interpreter.Scope;
 
 import java.util.List;
 
-public final class BlockCallExpression implements Expression {
+public final class BlockCallExpr implements Expr {
 
-	private final BlockExpression block;
-	private final List<Expression> args;
+	private final BlockExpr block;
+	private final List<Expr> args;
 
-	public BlockCallExpression(final BlockExpression block,
-			final List<Expression> args) {
+	public BlockCallExpr(final BlockExpr block,
+			final List<Expr> args) {
 		this.block = block;
 		this.args = args;
 	}
@@ -21,13 +21,13 @@ public final class BlockCallExpression implements Expression {
 	}
 
 	@Override
-	public Expression evaluateWithin(final Scope scope) {
-		final Expression[] evaluated = new Expression[args.size()];
+	public Expr evaluateWithin(final Scope scope) {
+		final Expr[] evaluated = new Expr[args.size()];
 		for (int i = 0; i < args.size(); i++) {
 			evaluated[i] = args.get(i).evaluateWithin(scope);
 		}
 		// TODO actually use the evaluated args
-		return block.call(new RecordExpression(scope, args));
+		return block.call(new RecordExpr(scope, args));
 	}
 
 	@Override

@@ -2,9 +2,9 @@ package io.mkremins.whydah.ast;
 
 import io.mkremins.whydah.interpreter.Scope;
 
-public final class ExpressionUtils {
+public final class ExprUtils {
 
-	public static Expression fullyEvaluate(Expression expr, final Scope scope) {
+	public static Expr fullyEvaluate(Expr expr, final Scope scope) {
 		while (!expr.isFullyEvaluated()) {
 			expr = expr.evaluateWithin(scope);
 		}

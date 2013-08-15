@@ -2,11 +2,11 @@ package io.mkremins.whydah.ast;
 
 import io.mkremins.whydah.interpreter.Scope;
 
-public interface Expression {
+public interface Expr {
 
 	boolean isFullyEvaluated();
 
-	Expression evaluateWithin(Scope scope);
+	Expr evaluateWithin(Scope scope);
 
 	String print();
 

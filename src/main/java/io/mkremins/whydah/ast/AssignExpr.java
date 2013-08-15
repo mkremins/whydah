@@ -2,13 +2,13 @@ package io.mkremins.whydah.ast;
 
 import io.mkremins.whydah.interpreter.Scope;
 
-public final class AssignmentExpression implements Expression {
+public final class AssignExpr implements Expr {
 
-	private final NameExpression left;
-	private final Expression right;
+	private final NameExpr left;
+	private final Expr right;
 
-	public AssignmentExpression(final NameExpression left,
-			final Expression right) {
+	public AssignExpr(final NameExpr left,
+			final Expr right) {
 		this.left = left;
 		this.right = right;
 	}
@@ -19,9 +19,9 @@ public final class AssignmentExpression implements Expression {
 	}
 
 	@Override
-	public Expression evaluateWithin(final Scope scope) {
+	public Expr evaluateWithin(final Scope scope) {
 		final Reference ref = left.evaluateWithin(scope);
-		final Expression value = ExpressionUtils.fullyEvaluate(right, scope);
+		final Expr value = ExprUtils.fullyEvaluate(right, scope);
 		ref.set(value);
 		return value;
 	}

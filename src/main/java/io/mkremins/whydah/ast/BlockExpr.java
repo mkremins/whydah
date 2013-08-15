@@ -2,21 +2,21 @@ package io.mkremins.whydah.ast;
 
 import io.mkremins.whydah.interpreter.Scope;
 
-public final class BlockExpression extends Scope implements Expression {
+public final class BlockExpr extends Scope implements Expr {
 
-	private final Expression[] contents;
+	private final Expr[] contents;
 
-	public BlockExpression(final Scope parent, final Expression... contents) {
+	public BlockExpr(final Scope parent, final Expr... contents) {
 		super(parent);
 		this.contents = contents;
 	}
 
-	public Expression call(final RecordExpression args) {
+	public Expr call(final RecordExpr args) {
 		set("args", args); // TODO ...or bind each argument directly by name?
-		Expression value = null;
-		for (final Expression expr : contents) {
+		Expr value = null;
+		for (final Expr expr : contents) {
 			value = expr.evaluateWithin(this);
-			if (expr instanceof ReturnExpression) {
+			if (expr instanceof ReturnExpr) {
 				return value;
 			}
 		}
@@ -29,7 +29,7 @@ public final class BlockExpression extends Scope implements Expression {
 	}
 
 	@Override
-	public Expression evaluateWithin(final Scope scope) {
+	public Expr evaluateWithin(final Scope scope) {
 		return this;
 	}
 
@@ -37,7 +37,7 @@ public final class BlockExpression extends Scope implements Expression {
 	public String print() {
 		final StringBuilder code = new StringBuilder();
 		code.append("[");
-		for (final Expression expr : contents) {
+		for (final Expr expr : contents) {
 			code.append(expr.print());
 		}
 		code.append("]");

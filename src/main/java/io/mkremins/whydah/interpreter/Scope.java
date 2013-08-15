@@ -1,18 +1,18 @@
 package io.mkremins.whydah.interpreter;
 
-import io.mkremins.whydah.ast.Expression;
-import io.mkremins.whydah.ast.ExpressionUtils;
+import io.mkremins.whydah.ast.Expr;
+import io.mkremins.whydah.ast.ExprUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Scope {
 
-	private final Map<String, Expression> vars;
+	private final Map<String, Expr> vars;
 	private final Scope parent;
 
 	public Scope(final Scope parent) {
-		vars = new HashMap<String, Expression>();
+		vars = new HashMap<String, Expr>();
 		this.parent = parent;
 	}
 
@@ -24,16 +24,16 @@ public class Scope {
 		getDeclaringScope(varName).vars.remove(varName);
 	}
 
-	public Expression get(final String varName) {
+	public Expr get(final String varName) {
 		return getDeclaringScope(varName).vars.get(varName);
 	}
 
-	public void set(final String varName, final Expression value) {
+	public void set(final String varName, final Expr value) {
 		Scope scope = getDeclaringScope(varName);
 		if (scope == null) {
 			scope = this;
 		}
-		scope.vars.put(varName, ExpressionUtils.fullyEvaluate(value, scope));
+		scope.vars.put(varName, ExprUtils.fullyEvaluate(value, scope));
 	}
 
 	private Scope getDeclaringScope(final String varName) {

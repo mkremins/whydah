@@ -2,11 +2,11 @@ package io.mkremins.whydah.ast;
 
 import io.mkremins.whydah.interpreter.Scope;
 
-public final class ReturnExpression implements Expression {
+public final class ReturnExpr implements Expr {
 
-	private final Expression expr;
+	private final Expr expr;
 
-	public ReturnExpression(final Expression expr) {
+	public ReturnExpr(final Expr expr) {
 		this.expr = expr;
 	}
 
@@ -16,8 +16,8 @@ public final class ReturnExpression implements Expression {
 	}
 
 	@Override
-	public Expression evaluateWithin(final Scope scope) {
-		return ExpressionUtils.fullyEvaluate(expr, scope);
+	public Expr evaluateWithin(final Scope scope) {
+		return ExprUtils.fullyEvaluate(expr, scope);
 	}
 
 	@Override
