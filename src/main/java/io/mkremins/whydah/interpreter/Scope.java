@@ -12,7 +12,7 @@ public class Scope {
 	private final Scope parent;
 
 	public Scope(final Scope parent) {
-		vars = new HashMap<>();
+		vars = new HashMap<String, Expression>();
 		this.parent = parent;
 	}
 
