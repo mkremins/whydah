@@ -1,5 +1,6 @@
 package io.mkremins.whydah.ast;
 
+import io.mkremins.whydah.interpreter.Obj;
 import io.mkremins.whydah.interpreter.Scope;
 
 public final class NumberExpr implements Expr {
@@ -11,13 +12,9 @@ public final class NumberExpr implements Expr {
 	}
 
 	@Override
-	public boolean isFullyEvaluated() {
-		return true;
-	}
-
-	@Override
-	public Expr evaluateWithin(final Scope scope) {
-		return this;
+	public Obj evaluateWithin(final Scope scope) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

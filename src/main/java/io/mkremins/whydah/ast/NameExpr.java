@@ -1,5 +1,6 @@
 package io.mkremins.whydah.ast;
 
+import io.mkremins.whydah.interpreter.Obj;
 import io.mkremins.whydah.interpreter.Scope;
 
 import java.util.List;
@@ -14,15 +15,11 @@ public final class NameExpr implements Expr {
 		right = names.size() == 1 ?
 				null : new NameExpr(names.subList(1, names.size()));
 	}
-
+	
 	@Override
-	public boolean isFullyEvaluated() {
-		return false;
-	}
-
-	@Override
-	public Reference evaluateWithin(final Scope scope) {
-		return new Reference(resolveScope(scope), resolveBaseName());
+	public Obj evaluateWithin(final Scope scope) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -30,24 +27,9 @@ public final class NameExpr implements Expr {
 		return left + " " + right.toString();
 	}
 
-	private Scope resolveScope(final Scope starting) {
-		if (right == null) {
-			return starting;
-		}
-		final Expr leftValue = starting.get(left);
-		if (leftValue instanceof RecordExpr) {
-			return right.resolveScope((RecordExpr) leftValue);
-		} else {
-			return null; // TODO throw exception instead of returning null
-		}
-	}
-
-	private String resolveBaseName() {
-		NameExpr child = right;
-		while (child.right != null) {
-			child = child.right;
-		}
-		return child.left;
+	public Reference getReference() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

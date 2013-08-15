@@ -1,5 +1,6 @@
 package io.mkremins.whydah.ast;
 
+import io.mkremins.whydah.interpreter.Obj;
 import io.mkremins.whydah.interpreter.Scope;
 
 public final class Reference implements Expr {
@@ -12,21 +13,16 @@ public final class Reference implements Expr {
 		this.name = name;
 	}
 
-	public Expr get() {
+	public Obj get() {
 		return scope.get(name);
 	}
 
-	public void set(final Expr value) {
+	public void set(final Obj value) {
 		scope.set(name, value);
 	}
-
+	
 	@Override
-	public boolean isFullyEvaluated() {
-		return false;
-	}
-
-	@Override
-	public Expr evaluateWithin(final Scope scope) {
+	public Obj evaluateWithin(final Scope scope) {
 		return get();
 	}
 

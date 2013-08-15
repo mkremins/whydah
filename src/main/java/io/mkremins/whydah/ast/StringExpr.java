@@ -1,6 +1,8 @@
 package io.mkremins.whydah.ast;
 
+import io.mkremins.whydah.interpreter.Obj;
 import io.mkremins.whydah.interpreter.Scope;
+import io.mkremins.whydah.interpreter.StringObj;
 
 public final class StringExpr implements Expr {
 
@@ -11,13 +13,8 @@ public final class StringExpr implements Expr {
 	}
 
 	@Override
-	public boolean isFullyEvaluated() {
-		return true;
-	}
-
-	@Override
-	public Expr evaluateWithin(final Scope scope) {
-		return this;
+	public Obj evaluateWithin(final Scope scope) {
+		return new StringObj(value);
 	}
 
 	@Override

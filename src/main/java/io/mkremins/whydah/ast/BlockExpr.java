@@ -1,20 +1,23 @@
 package io.mkremins.whydah.ast;
 
+import io.mkremins.whydah.interpreter.BlockObj;
+import io.mkremins.whydah.interpreter.Obj;
+import io.mkremins.whydah.interpreter.RecordObj;
 import io.mkremins.whydah.interpreter.Scope;
 
 public final class BlockExpr extends Scope implements Expr {
 
-	private final Expr[] contents;
+	private final Expr[] body;
 
-	public BlockExpr(final Scope parent, final Expr... contents) {
+	public BlockExpr(final Scope parent, final Expr... body) {
 		super(parent);
-		this.contents = contents;
+		this.body = body;
 	}
 
-	public Expr call(final RecordExpr args) {
-		set("args", args); // TODO ...or bind each argument directly by name?
-		Expr value = null;
-		for (final Expr expr : contents) {
+	public Obj call(final RecordObj args) {
+		set("args", args); // TODO use a Pattern to handle binding
+		Obj value = null;
+		for (final Expr expr : body) {
 			value = expr.evaluateWithin(this);
 			if (expr instanceof ReturnExpr) {
 				return value;
@@ -24,20 +27,15 @@ public final class BlockExpr extends Scope implements Expr {
 	}
 
 	@Override
-	public boolean isFullyEvaluated() {
-		return true;
-	}
-
-	@Override
-	public Expr evaluateWithin(final Scope scope) {
-		return this;
+	public Obj evaluateWithin(final Scope scope) {
+		return new BlockObj(body);
 	}
 
 	@Override
 	public String print() {
 		final StringBuilder code = new StringBuilder();
 		code.append("[");
-		for (final Expr expr : contents) {
+		for (final Expr expr : body) {
 			code.append(expr.print());
 		}
 		code.append("]");

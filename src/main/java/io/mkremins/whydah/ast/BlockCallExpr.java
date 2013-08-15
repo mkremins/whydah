@@ -1,5 +1,6 @@
 package io.mkremins.whydah.ast;
 
+import io.mkremins.whydah.interpreter.Obj;
 import io.mkremins.whydah.interpreter.Scope;
 
 import java.util.List;
@@ -14,20 +15,15 @@ public final class BlockCallExpr implements Expr {
 		this.block = block;
 		this.args = args;
 	}
-
+	
 	@Override
-	public boolean isFullyEvaluated() {
-		return false;
-	}
-
-	@Override
-	public Expr evaluateWithin(final Scope scope) {
-		final Expr[] evaluated = new Expr[args.size()];
+	public Obj evaluateWithin(final Scope scope) {
+		final Obj[] evaluated = new Obj[args.size()];
 		for (int i = 0; i < args.size(); i++) {
 			evaluated[i] = args.get(i).evaluateWithin(scope);
 		}
 		// TODO actually use the evaluated args
-		return block.call(new RecordExpr(scope, args));
+		return block.call(null);
 	}
 
 	@Override
