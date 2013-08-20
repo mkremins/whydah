@@ -12,11 +12,11 @@ public final class RecordObj extends Obj {
 	}
 	
 	public Obj getField(final String name) {
+		// TODO return exception object instead of `nothing` if field undefined?
 		return hasField(name) ? NothingObj.INSTANCE : fields.get(name);
 	}
 	
 	public Obj setField(final String name, final Obj obj) {
-		// TODO return exception object instead of `nothing` if field undefined?
 		return hasField(name) ? cloneWithChange(name, obj) : this;
 	}
 	
@@ -27,7 +27,7 @@ public final class RecordObj extends Obj {
 	private RecordObj cloneWithChange(final String name, final Obj newObj) {
 		final Map<String, Obj> newFields = new HashMap<String, Obj>(fields.size());
 		for (final String fieldName : fields.keySet()) {
-			final Obj obj = name == fieldName ? newObj : fields.get(fieldName);
+			final Obj obj = (fieldName == name) ? newObj : fields.get(fieldName);
 			newFields.put(fieldName, obj);
 		}
 		return new RecordObj(newFields);
