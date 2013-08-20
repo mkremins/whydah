@@ -3,15 +3,24 @@ package io.mkremins.whydah.ast;
 import io.mkremins.whydah.interpreter.Obj;
 import io.mkremins.whydah.interpreter.Scope;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public final class RecordExpr extends Scope implements Expr {
+public final class RecordExpr implements Expr {
+	
+	private final Map<String, Obj> fields;
 
-	public RecordExpr(final Scope parent, final List<Obj> vars) {
-		super(parent);
+	public RecordExpr(final List<Obj> vars) {
+		fields = new HashMap<String, Obj>();
 		for (int i = 0; i < vars.size(); i++) {
-			set(String.valueOf(i), vars.get(i));
+			fields.put(String.valueOf(i), vars.get(i));
 		}
+	}
+	
+	public Map<String, Obj> getFields() {
+		return Collections.unmodifiableMap(fields);
 	}
 
 	@Override
