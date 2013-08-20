@@ -19,7 +19,7 @@ public final class StringExpr implements Expr {
 
 	@Override
 	public String print() {
-		return "\"" + value + "\"";
+		return "'" + value + "'";
 	}
 
 }
