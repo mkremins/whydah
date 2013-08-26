@@ -2,6 +2,7 @@ package io.mkremins.whydah.parser;
 
 public enum TokenType {
 	ASSIGN,
+	CAPTURE,
 	LPAREN,
 	RPAREN,
 	LBRACKET,
@@ -20,6 +21,7 @@ public enum TokenType {
 
 	public static TokenType of(final char ch) {
 		switch(ch) {
+		case '&': return CAPTURE;
 		case '(': return LPAREN;
 		case ')': return RPAREN;
 		case '{': return LBRACE;

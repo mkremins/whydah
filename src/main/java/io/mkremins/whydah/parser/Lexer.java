@@ -36,8 +36,9 @@ public final class Lexer implements Reader<Token> {
 		case ':':
 			return readPunctuator();
 		case '=':
-			return new Token(TokenType.ASSIGN, "="); // TODO steps on infix
-														// operators' toes
+			return new Token(TokenType.ASSIGN, "=");
+		case '&':
+			return new Token(TokenType.CAPTURE, "&");
 		case '.':
 			return Character.isDigit(lookahead(1)) ? readNumLiteral()
 					: readPunctuator();
