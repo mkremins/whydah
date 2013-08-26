@@ -1,24 +1,15 @@
 package io.mkremins.whydah.ast;
 
-import io.mkremins.whydah.interpreter.Obj;
-import io.mkremins.whydah.interpreter.Scope;
-
 public final class ReturnExpr implements Expr {
 
-	private final Expr expr;
+	private final Expr returnValue;
 
-	public ReturnExpr(final Expr expr) {
-		this.expr = expr;
+	public ReturnExpr(final Expr returnValue) {
+		this.returnValue = returnValue;
 	}
 
-	@Override
-	public Obj evaluateWithin(final Scope scope) {
-		return expr.evaluateWithin(scope);
+	public Expr getReturnValue() {
+		return returnValue;
 	}
-
-	@Override
-	public String print() {
-		return "return " + expr.toString();
-	}
-
+	
 }
