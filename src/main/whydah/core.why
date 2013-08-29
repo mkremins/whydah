@@ -24,13 +24,13 @@ def forEachIn (items, &iter) do
 end
 
 def map (items, &transform) do
-    transformed = new List
+    transformed = []
     forEachIn items, item -> transformed add (transform item)
     return transformed
 end
 
 def filter (items, &accept) do
-    accepted = new List
+    accepted = []
     forEachIn items, item -> if (accept item), accepted add item
     return accepted
 end
