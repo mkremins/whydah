@@ -1,6 +1,6 @@
-def if (^false, &then, &else) -> else
-def if (^nothing, &then, &else) -> else
-def if (_, &then, &else) -> then
+def if (^false, _then, &else) -> else
+def if (^nothing, _then, &else) -> else
+def if (_condition, &then, _else) -> then
 def if (condition, &then) -> if condition, &then, nothing
 
 def not (^true) -> false
