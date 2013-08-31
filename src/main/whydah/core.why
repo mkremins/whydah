@@ -5,6 +5,8 @@ if |condition, &then| -> if condition, &then, nothing
 
 not |condition| -> if condition, false, true
 
+unless |condition, &then| -> if not condition, then
+
 while |condition, &block| -> do
   if condition, do
     block
