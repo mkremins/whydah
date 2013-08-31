@@ -35,3 +35,10 @@ filter |items, &accept| -> do
   forEachIn items, |item| -> if accept item, accepted add item
   return accepted
 end
+
+|items| each |&iter| -> forEachIn items, &iter
+
+|items| every -> do
+  items each |item| -> if not item, return false
+  return true
+end 
