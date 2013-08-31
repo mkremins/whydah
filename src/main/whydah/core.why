@@ -1,36 +1,35 @@
-def if (^false, _then, &else) -> else
-def if (^nothing, _then, &else) -> else
-def if (_condition, &then, _else) -> then
-def if (condition, &then) -> if condition, &then, nothing
+if |^false, _then, &else| -> else
+if |^nothing, _then, &else| -> else
+if |_condition, &then, _else| -> then
+if |condition, &then| -> if condition, &then, nothing
 
-def not (^true) -> false
-def not (^false) -> true
+not |condition| -> if condition, false, true
 
-def while (&condition, &block) do
-    if condition, do
-        block
-        while &condition, &block
-    end
+while |condition, &block| -> do
+  if condition, do
+    block
+    while &condition, &block
+  end
 end
 
-def until (&condition, &block) -> while (not condition), &block
+until |&condition, &block| -> while not condition, &block
 
-def forEachIn (items, &iter) do
-    index = 0
-    while (index < items count), do
-        iter (items get index)
-        index = index + 1
-    end
+forEachIn |items, &iter| -> do
+  index = 0
+  until index == items count, do
+    iter (items get index)
+    index = index + 1
+  end
 end
 
-def map (items, &transform) do
-    transformed = []
-    forEachIn items, item -> transformed add (transform item)
-    return transformed
+map |items, &transform| -> do
+  transformed = []
+  forEachIn items, |item| -> transformed add (transform item)
+  return transformed
 end
 
-def filter (items, &accept) do
-    accepted = []
-    forEachIn items, item -> if (accept item), accepted add item
-    return accepted
+filter |items, &accept| -> do
+  accepted = []
+  forEachIn items, |item| -> if accept item, accepted add item
+  return accepted
 end
